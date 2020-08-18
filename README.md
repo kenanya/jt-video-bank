@@ -2,3 +2,12 @@ This is Video Bank Service. This service provide basic CRUD function and some ot
 The data is stored to MongoDB. gRPC is used here for the communication.
 
 Stack Tech: Golang, MongoDB, gRPC, docker
+
+
+## How to Run
+git clone https://github.com/kenanya/jt-video-bank.git
+
+## How to Start
+cd jt-video-bank/cmd/server
+go build .
+APP_ENV=local ./server
