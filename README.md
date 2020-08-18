@@ -5,7 +5,7 @@ The data is stored to MongoDB. gRPC is used here for the communication.
 Stack Tech: Golang, MongoDB, gRPC, docker
 
 
-## How to Run
+## Clone/Download Repo
 git clone https://github.com/kenanya/jt-video-bank.git
 
 ## How to Start
