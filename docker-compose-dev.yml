@@ -1,0 +1,22 @@
+version: '3.2'
+
+services:
+  video_bank:
+    image: "$DOCKER_REGISTRY/devops/jt_video_bank:$CI_BUILD_REF_NAME"    
+    working_dir: /opt
+    deploy:
+      mode: global
+    environment:
+      - APP_ENV=staging
+    # volumes:
+    #   - video_bank_data:/log
+    networks: 
+      - jt_network
+  
+networks:
+  jt_network:
+    driver: overlay
+    attachable: true
+
+# volumes:
+#   video_bank_data:

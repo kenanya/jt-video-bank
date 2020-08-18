@@ -1,0 +1,32 @@
+# a: Easy!
+# b:
+#   c: 2
+#   d: [3, 4]
+
+local_conf:
+  db_host: localhost:27017
+  db_user: ken
+  db_password: ken123
+  db_schema: jt_db
+  db_schema_test: jt_db_test
+  grpc_port: 9603
+  
+staging_conf:
+  db_host: 10.16.5.159:27017
+  db_user: ds_cool_dev
+  db_password: cool_kas!
+  db_schema: jt_db
+  db_schema_test: jt_db_test
+  grpc_port: 9603
+
+production_conf: 
+  # ganti ke ip DB production
+  db_host: 10.16.5.177:27017
+  db_user: jt_db
+  db_password: jt%401#!)
+  db_schema: jt_db
+  db_schema_test: jt_db_test
+  grpc_port: 9603
+
+
+  

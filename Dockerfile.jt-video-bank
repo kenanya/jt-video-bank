@@ -1,0 +1,20 @@
+
+# FROM 10.1.35.36:5000/devops/golang-lp:1.1  
+# FROM golang
+# FROM local/golang-lbs-lp:1.1
+
+FROM 10.1.35.36:5000/devops/golang:alpine
+
+ENV GOPATH /go
+ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+
+COPY go.mod /go/src
+
+RUN set -eux; \
+    go version; \
+    apk update && apk --no-cache add git curl libressl; \
+    cd /go/src; \
+    export GO111MODULE=on; \
+    go mod vendor;
+
+WORKDIR $GOPATH

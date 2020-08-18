@@ -1,0 +1,239 @@
+syntax = "proto3";
+package v1;
+
+import "google/protobuf/timestamp.proto";
+// import "google/protobuf/wrappers.proto";
+import "protoc-gen-gotag/tagger/tagger.proto";
+import "pmongo/objectid.proto";
+
+message VideoBank {
+    pmongo.ObjectId id = 999 [(tagger.tags) = "bson:\"_id,omitempty\"" ];      
+    string contentId = 1;    // 1000001, 1000004, 
+    string idx = 2;     // GF1000001 / SR1000001 / GT1000004
+    string provider = 3;
+    string providerShort = 4;
+    string providerLabel = 5;   // image_url
+    string title = 6;  
+    // string titlePackage = 7;  
+    repeated string tags = 8;
+    MV_VideoTypeOpt videoType = 9;
+    repeated MV_GenreOpt genre = 10;    // [2, 3, 1]
+    int32 year = 11;
+    string duration = 12;    
+    string synopsis = 14;
+    repeated string cast = 15;
+    string playerUrl = 16;
+    MV_PosterData poster = 17;  
+    repeated string director = 18;
+    MV_ContentTypeOpt contentType = 19;
+    string availability = 20;
+    string contentAs = 21;
+    int32 contentLevel = 22;
+    bool isActive = 23;
+    bool isValid = 24;
+    google.protobuf.Timestamp createdAt = 25;   
+    google.protobuf.Timestamp expiredDate = 33;  
+}
+
+enum MV_ContentTypeOpt {
+    FREE = 0;
+    PREMIUM = 1;
+} 
+
+enum MV_VideoTypeOpt {
+    // GEN_MV = 0;
+    // HOL_MV = 1;
+    // IND_MV = 2;
+    // THAI_MV = 3;
+    // MUSIC_MV = 4;
+    // ANIME_MV = 5;
+
+    GEN_MV = 0;
+    MUSIC_MV = 1; 
+    ANIME_MV = 2;
+    ENGLISH_MV = 3;
+    GERMAN_MV = 4;
+    DUTCH_MV = 5;
+    FRENCH_MV = 6;
+    PUNJABI_MV = 7;
+    TAJIK_MV = 8;
+    INDONESIAN_MV = 9;
+    HINDI_MV = 11;
+    TAGALOG_MV = 12;
+    HEBREW_MV = 13;
+    THAI_MV = 14;
+    GUJARATI_MV = 15; 
+    JAPANESE_MV = 16;
+    KOREAN_MV = 17;
+    CHINESE_MV = 18;
+    MOROCCO_MV = 19;
+    SPANISH_MV = 20;
+    ASSAMESE_MV = 21;
+    
+}
+
+message MV_PosterData {        // json format
+    string s = 1;  // "s":"blabla.jpg",
+    string m = 2;
+    string l = 3;   
+}
+
+enum MV_GenreOpt {
+    ACTION = 0;                //laga, action, actions
+    COMEDY = 1;                 //komedi, comedy,
+    ROMANCE = 2;                //romance, romantic, romansa, romantik, โรแมนติก
+    THRILLER = 3;               //thriller
+    HORROR = 4;                 //horor, horror
+    HISTORY = 5;                //history, sejarah
+    KOREAN = 6;                 //korea
+    DRAMA = 7;                  //drama
+    FANTASY = 8;                //fantasy
+    SCI_FI = 9;                 //sci_fy, sci-fy,
+    ANIME = 10;                 //anime, animation
+    CRIME = 11;                 //crime, kriminal
+    SCI_FI_FANTASY = 12;        //sci-fi fantasy, 
+    ACTION_ADVENTURE = 13;      //action & adventure,
+    FICTION = 14;               //fiksi, fiction
+    SPIRITUAL = 15;             //spiritual
+    RELIGION = 16;              //religi, religion
+    TRAVEL = 17;                //travel
+    STYLE = 18;                 //gaya
+    CLASSIC = 19;               //klasik, classic
+    KIDS_FAMILY = 20;           //kids & family
+    MYSTERY = 21;               //mystery
+    MUSICAL = 22;               //musical, musikal
+    SUPERHERO = 23;             //superhero
+    POLITICS = 24;              //politics, politik
+    MARTIAL_ARTS = 25;          //martial_arts, martialarts
+    SPORTS = 26;                //sports, olahraga
+    KIDS = 27;                  //kids
+    ROMANTIC_THRILLERS = 28;    //romantic thrillers, romanticthrillers
+    WAR = 29;                   //war, perang, 
+    FAMILY = 30;                //family, keluarga
+    HOLLYWOOD = 31;             //hollywood
+    CRITICALLY_ACCLAIMED = 32;  //critically acclaimed, criticallyacclaimed,
+    DOCUMENTARY = 33;
+    
+    OTHERS = 99;                 //other, lainnya, 
+}
+
+message MV_CreateRequest {
+    string api = 1;
+    VideoBank videoBank = 2;
+}
+
+message MV_CreateResponse {
+    string api = 1;
+    // string id = 2;
+    // pmongo.ObjectId id = 2;  
+    pmongo.ObjectId id = 2 [(tagger.tags) = "bson:\"_id,omitempty\"" ];
+}
+
+message MV_CreateBulkRequest {
+    string api = 1;
+    // int32 bulkLimit
+    repeated VideoBank videoBankList = 2;
+}
+
+message MV_CreateBulkResponse {
+    string api = 1;
+    repeated pmongo.ObjectId ids = 2 [(tagger.tags) = "bson:\"_id,omitempty\"" ];
+}
+
+message MV_ReadRequest{
+    string api = 1;
+    string id = 2;
+    string idx = 3;
+}
+
+message MV_ReadResponse{
+    string api = 1;
+    VideoBank videoBank = 2;
+}
+
+message MV_UpdateRequest{
+    string api = 1;
+    VideoBank videoBank = 2;
+    string id = 3;
+}
+
+message MV_UpdateResponse{
+    string api = 1;
+    pmongo.ObjectId upId = 2 [(tagger.tags) = "bson:\"_id,omitempty\"" ];
+}
+
+message MV_DeleteRequest{
+    string api = 1;
+    string id = 2;
+    string updatedBy = 3;
+}
+
+message MV_DeleteResponse{
+    string api = 1;
+    pmongo.ObjectId delId = 2 [(tagger.tags) = "bson:\"_id,omitempty\"" ];
+}
+
+message MV_ReadAllRequest{
+    string api = 1;
+    string title = 2;
+    string videoType = 3;
+    string genre = 4;
+    int64 skip = 5;
+    int64 limit = 6;
+}
+
+message MV_ReadAllResponse{
+    string api = 1;
+    repeated VideoBank videoBanks = 2;
+    int32 totalData = 3;
+    int32 totalPage = 4;
+    // int32 currentPage = 5;
+}
+
+message GenreList {
+    pmongo.ObjectId id = 999 [(tagger.tags) = "bson:\"_id,omitempty\"" ];
+    string api = 1;
+    repeated string genre = 2;
+}
+
+message MV_SetGenreRequest{
+     string api = 1;
+}
+
+message MV_GetGenreResponse{
+    string api = 1;
+    repeated string genre = 2;
+}
+
+message MV_RefreshRequest{
+    string api = 1;
+    string sourceColName = 2;
+    string targetColName = 3;
+}
+
+message MV_RefreshResponse{
+    string api = 1;
+    bool isSuccess = 2;
+    // pmongo.ObjectId upId = 2 [(tagger.tags) = "bson:\"_id,omitempty\"" ];
+}
+
+
+service VideoBankService {
+    rpc Create(MV_CreateRequest) returns (MV_CreateResponse);
+
+    rpc CreateBulk(MV_CreateBulkRequest) returns (MV_CreateBulkResponse);
+
+    rpc Read(MV_ReadRequest) returns (MV_ReadResponse);
+
+    rpc Update(MV_UpdateRequest) returns (MV_UpdateResponse);
+
+    rpc Delete(MV_DeleteRequest) returns (MV_DeleteResponse);
+
+    rpc ReadAll(MV_ReadAllRequest) returns (MV_ReadAllResponse);
+
+    rpc GetGenreList(MV_SetGenreRequest) returns (MV_GetGenreResponse);
+
+    rpc RefreshCollection(MV_RefreshRequest) returns (MV_RefreshResponse);
+}
+
+

@@ -1,0 +1,1 @@
+protoc --proto_path=api/proto/v1 --proto_path=third_party --gotag_out=xxx="bson+\"-\"",output_path=pkg/api/v1:. video_bank_service.proto
