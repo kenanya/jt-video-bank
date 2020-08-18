@@ -12,3 +12,7 @@ git clone https://github.com/kenanya/jt-video-bank.git
 cd jt-video-bank/cmd/server<br/>
 go build .<br/>
 APP_ENV=local ./server
+
+## Consume Service
+We can use <a href="https://appimage.github.io/BloomRPC/">BloomRPC</a> to test consuming this service.
+
