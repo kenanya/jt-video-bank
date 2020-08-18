@@ -9,6 +9,6 @@ Stack Tech: Golang, MongoDB, gRPC, docker
 git clone https://github.com/kenanya/jt-video-bank.git
 
 ## How to Start
-cd jt-video-bank/cmd/server
-go build .
+cd jt-video-bank/cmd/server<br/>
+go build .<br/>
 APP_ENV=local ./server
